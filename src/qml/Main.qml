@@ -85,6 +85,18 @@ ApplicationWindow {
                 ? parent.height
                 : Math.min(parent.height - 48, Math.max(840, parent.height * 0.96))
 
+        // Subtle shadow for the shell (only when not fullscreen)
+        Rectangle {
+            anchors.fill: shell
+            anchors.margins: -1
+            radius: shell.radius
+            color: "transparent"
+            border.color: "#0A000000"
+            border.width: window.visibility === Window.FullScreen ? 0 : 1
+            visible: window.visibility !== Window.FullScreen
+            z: -1
+        }
+
         Rectangle {
             id: shell
             anchors.fill: parent
@@ -93,6 +105,7 @@ ApplicationWindow {
             border.color: window.themeTokens.panelBorderColor
             border.width: 1
             clip: true
+            antialiasing: true
 
             Components.PcTopBar {
                 anchors.top: parent.top
@@ -119,8 +132,14 @@ ApplicationWindow {
                     Layout.preferredWidth: 256
                     Layout.fillHeight: true
                     color: window.themeTokens.panelBackground
-                    border.color: window.themeTokens.panelBorderColor
-                    border.width: 0
+
+                    // 右侧分隔线
+                    Rectangle {
+                        anchors.right: parent.right
+                        width: 1
+                        height: parent.height
+                        color: window.themeTokens.dividerColor
+                    }
 
                     ColumnLayout {
                         anchors.fill: parent

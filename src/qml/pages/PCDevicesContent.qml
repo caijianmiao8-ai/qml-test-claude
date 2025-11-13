@@ -150,11 +150,11 @@ Item {
                             radius: 20
                             enableHoverEffect: true
                             Layout.fillWidth: true
-                            implicitHeight: 240
+                            Layout.preferredHeight: 240
 
                             ColumnLayout {
-                                Layout.fillWidth: true
-                                spacing: 16
+                                anchors.fill: parent
+                                spacing: 12
 
                                 RowLayout {
                                     Layout.fillWidth: true
@@ -234,6 +234,8 @@ Item {
                                     }
                                 }
 
+                                Item { Layout.fillHeight: true }
+
                                 RowLayout {
                                     Layout.fillWidth: true
                                     spacing: 8
@@ -312,11 +314,11 @@ Item {
                             radius: 20
                             enableHoverEffect: true
                             Layout.fillWidth: true
-                            implicitHeight: 240
+                            Layout.preferredHeight: 240
 
                             ColumnLayout {
-                                Layout.fillWidth: true
-                                spacing: 16
+                                anchors.fill: parent
+                                spacing: 12
 
                                 RowLayout {
                                     Layout.fillWidth: true
@@ -455,6 +457,8 @@ Item {
                                         }
                                     }
                                 }
+
+                                Item { Layout.fillHeight: true }
 
                                 RowLayout {
                                     Layout.fillWidth: true

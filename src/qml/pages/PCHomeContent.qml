@@ -75,9 +75,9 @@ Item {
                     width: 260
                     height: 160
 
-                    Column {
+                    ColumnLayout {
                         anchors.fill: parent
-                        spacing: 12
+                        spacing: 10
 
                         Rectangle {
                             width: 48
@@ -93,17 +93,21 @@ Item {
                             }
                         }
 
+                        Item { Layout.fillHeight: true; Layout.minimumHeight: 4 }
+
                         Text {
                             text: t ? t("onlineDevices") : "在线设备"
                             color: themeTokens.textSecondary
                             font.pixelSize: 14
+                            Layout.fillWidth: true
                         }
 
                         Text {
                             text: onlineDevicesCount.toString()
                             color: root.themeTokens.orangeAccent
-                            font.pixelSize: 30
+                            font.pixelSize: 32
                             font.weight: Font.DemiBold
+                            Layout.fillWidth: true
                         }
                     }
                 }
@@ -116,97 +120,106 @@ Item {
                 radius: 20
                 width: parent.width
 
-                Column {
+                ColumnLayout {
                     anchors.fill: parent
-                    spacing: 24
+                    spacing: 20
 
                     Text {
                         text: t ? t("thisMachineInfo") : "本机信息"
                         color: themeTokens.textPrimary
-                        font.pixelSize: 24
+                        font.pixelSize: 20
                         font.weight: Font.DemiBold
+                        Layout.fillWidth: true
                     }
 
                     GridLayout {
+                        Layout.fillWidth: true
                         columns: 2
-                        rowSpacing: 24
-                        columnSpacing: 64
-                        width: parent.width
+                        rowSpacing: 20
+                        columnSpacing: 48
 
                         // 设备名称
-                        Column {
+                        ColumnLayout {
                             Layout.fillWidth: true
-                            spacing: 8
+                            spacing: 6
 
                             Text {
                                 text: t ? t("deviceName") : "设备名称"
                                 color: themeTokens.textSecondary
-                                font.pixelSize: 14
+                                font.pixelSize: 13
+                                Layout.fillWidth: true
                             }
                             Text {
                                 text: "我的工作电脑"
                                 color: themeTokens.textPrimary
-                                font.pixelSize: 18
+                                font.pixelSize: 16
                                 font.weight: Font.Medium
+                                Layout.fillWidth: true
                             }
                         }
 
                         // 设备 ID
-                        Column {
+                        ColumnLayout {
                             Layout.fillWidth: true
-                            spacing: 8
+                            spacing: 6
 
                             Text {
                                 text: t ? t("deviceId") : "设备ID"
                                 color: themeTokens.textSecondary
-                                font.pixelSize: 14
+                                font.pixelSize: 13
+                                Layout.fillWidth: true
                             }
                             Text {
                                 text: "RD-2024-10241502"
                                 color: themeTokens.textPrimary
-                                font.pixelSize: 18
+                                font.pixelSize: 16
                                 font.family: "Monospace"
+                                Layout.fillWidth: true
                             }
                         }
 
                         // 本机 IP
-                        Column {
+                        ColumnLayout {
                             Layout.fillWidth: true
-                            spacing: 8
+                            spacing: 6
 
                             Text {
                                 text: t ? t("localIp") : "本机IP"
                                 color: themeTokens.textSecondary
-                                font.pixelSize: 14
+                                font.pixelSize: 13
+                                Layout.fillWidth: true
                             }
                             Text {
                                 text: "192.168.1.100"
                                 color: themeTokens.textPrimary
-                                font.pixelSize: 18
+                                font.pixelSize: 16
                                 font.family: "Monospace"
+                                Layout.fillWidth: true
                             }
                         }
 
                         // 网络状态
-                        Column {
+                        ColumnLayout {
                             Layout.fillWidth: true
-                            spacing: 8
+                            spacing: 6
 
                             Text {
                                 text: t ? t("networkStatus") : "网络状态"
                                 color: themeTokens.textSecondary
-                                font.pixelSize: 14
+                                font.pixelSize: 13
+                                Layout.fillWidth: true
                             }
 
                             Row {
                                 spacing: 8
 
                                 Rectangle {
-                                    width: 10
-                                    height: 10
-                                    radius: 5
+                                    width: 8
+                                    height: 8
+                                    radius: 4
                                     color: root.themeTokens.successColor
                                     antialiasing: true
+                                    anchors.verticalCenter: parent.verticalCenter
 
                                     SequentialAnimation on opacity {
                                         loops: Animation.Infinite
@@ -218,7 +231,7 @@ Item {
                                 Text {
                                     text: t ? t("lanOnline") : "局域网在线"
                                     color: root.themeTokens.successColor
-                                    font.pixelSize: 18
+                                    font.pixelSize: 16
                                     font.weight: Font.Medium
                                 }
                             }
@@ -234,7 +247,7 @@ Item {
                 radius: 20
                 width: parent.width
 
-                Column {
+                ColumnLayout {
                     anchors.fill: parent
                     spacing: 16
 
@@ -246,7 +259,7 @@ Item {
                     }
 
                     RowLayout {
-                        width: parent.width
+                        Layout.fillWidth: true
                         spacing: 16
 
                         // 设备管理
@@ -259,10 +272,10 @@ Item {
                             border.width: 1
                             antialiasing: true
 
-                            Column {
+                            ColumnLayout {
                                 anchors.fill: parent
                                 anchors.margins: 16
-                                spacing: 8
+                                spacing: 6
 
                                 Icons.GridIcon {
                                     size: 24
@@ -274,6 +287,7 @@ Item {
                                     color: themeTokens.textPrimary
                                     font.pixelSize: 14
                                     font.weight: Font.Medium
+                                    Layout.fillWidth: true
                                 }
 
                                 Text {
@@ -281,7 +295,10 @@ Item {
                                     color: themeTokens.textSecondary
                                     font.pixelSize: 12
                                     wrapMode: Text.WordWrap
+                                    Layout.fillWidth: true
                                 }
+
+                                Item { Layout.fillHeight: true }
                             }
 
                             MouseArea {
@@ -303,10 +320,10 @@ Item {
                             border.width: 1
                             antialiasing: true
 
-                            Column {
+                            ColumnLayout {
                                 anchors.fill: parent
                                 anchors.margins: 16
-                                spacing: 8
+                                spacing: 6
 
                                 Icons.SettingsIcon {
                                     size: 24
@@ -318,6 +335,7 @@ Item {
                                     color: themeTokens.textPrimary
                                     font.pixelSize: 14
                                     font.weight: Font.Medium
+                                    Layout.fillWidth: true
                                 }
 
                                 Text {
@@ -325,7 +343,10 @@ Item {
                                     color: themeTokens.textSecondary
                                     font.pixelSize: 12
                                     wrapMode: Text.WordWrap
+                                    Layout.fillWidth: true
                                 }
+
+                                Item { Layout.fillHeight: true }
                             }
 
                             MouseArea {
