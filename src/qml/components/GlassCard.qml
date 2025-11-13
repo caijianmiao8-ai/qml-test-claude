@@ -21,15 +21,15 @@ Item {
     // Hover state
     property bool hovered: false
 
-    // 阴影，模拟 React 里的 shadow-[0_30px_60px_rgba(0,0,0,0.06)] (light) 或 shadow-[0_30px_80px_rgba(0,0,0,0.8)] (dark)
+    // 柔和的阴影效果
     DropShadow {
         anchors.fill: bg
         source: bg
         horizontalOffset: 0
-        verticalOffset: enableHoverEffect && hovered ? 40 : 30
-        radius: enableHoverEffect && hovered ? 80 : 60
-        samples: 64
-        color: root.themeTokens ? root.themeTokens.cardShadowColor : "#0F000000"
+        verticalOffset: enableHoverEffect && hovered ? 16 : 8
+        radius: enableHoverEffect && hovered ? 24 : 16
+        samples: 32
+        color: root.themeTokens ? root.themeTokens.cardShadowColor : "#14000000"
         transparentBorder: true
         cached: true
         z: -1

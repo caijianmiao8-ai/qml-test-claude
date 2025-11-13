@@ -135,9 +135,11 @@ Item {
                 }
 
                 // 控制端设备卡片列表
-                Flow {
+                GridLayout {
                     Layout.fillWidth: true
-                    spacing: 24
+                    columns: 2
+                    columnSpacing: 24
+                    rowSpacing: 24
 
                     Repeater {
                         model: controllersModel
@@ -147,9 +149,8 @@ Item {
                             padding: 24
                             radius: 20
                             enableHoverEffect: true
-                            implicitWidth: 420
-                            implicitHeight: 260
-                            Layout.preferredWidth: 420
+                            Layout.fillWidth: true
+                            implicitHeight: 240
 
                             ColumnLayout {
                                 Layout.fillWidth: true
@@ -296,9 +297,11 @@ Item {
                     wrapMode: Text.WordWrap
                 }
 
-                Flow {
+                GridLayout {
                     Layout.fillWidth: true
-                    spacing: 24
+                    columns: 2
+                    columnSpacing: 24
+                    rowSpacing: 24
 
                     Repeater {
                         model: devicesModel
@@ -308,9 +311,8 @@ Item {
                             padding: 24
                             radius: 20
                             enableHoverEffect: true
-                            implicitWidth: 540
-                            implicitHeight: 260
-                            Layout.preferredWidth: 540
+                            Layout.fillWidth: true
+                            implicitHeight: 240
 
                             ColumnLayout {
                                 Layout.fillWidth: true
