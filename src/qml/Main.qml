@@ -73,10 +73,10 @@ ApplicationWindow {
         anchors.centerIn: parent
         width: window.visibility === Window.FullScreen
                ? parent.width
-               : Math.min(parent.width - 96, 1280)
+               : Math.min(parent.width - 80, 1280)
         height: window.visibility === Window.FullScreen
                 ? parent.height
-                : Math.min(parent.height - 96, 960)
+                : Math.min(parent.height - 48, Math.max(840, parent.height * 0.96))
 
         Rectangle {
             id: shell
@@ -104,7 +104,7 @@ ApplicationWindow {
 
             RowLayout {
                 anchors.fill: parent
-                anchors.topMargin: 80
+                anchors.topMargin: 64
                 spacing: 0
 
                 // ===== 左侧侧边栏 =====
@@ -113,7 +113,7 @@ ApplicationWindow {
                     Layout.fillHeight: true
                     color: window.themeTokens.panelBackground
                     border.color: window.themeTokens.panelBorderColor
-                    border.width: 1
+                    border.width: 0
 
                     ColumnLayout {
                         anchors.fill: parent
@@ -333,10 +333,13 @@ ApplicationWindow {
             radius: 14
             color: menuButton.active
                    ? window.themeTokens.sidebarActiveBackground
-                   : "transparent"
-            border.color: menuButton.active
-                          ? window.themeTokens.panelBorderColor
-                          : "transparent"
+                   : (menuButton.hovered ? window.themeTokens.hoverBackground : "transparent")
+            border.width: 0
+            antialiasing: true
+
+            Behavior on color {
+                ColorAnimation { duration: 150 }
+            }
         }
 
         contentItem: RowLayout {
@@ -397,6 +400,11 @@ ApplicationWindow {
             color: controlButton.hovered
                    ? controlButton.hoverColor
                    : "transparent"
+            antialiasing: true
+
+            Behavior on color {
+                ColorAnimation { duration: 150 }
+            }
         }
 
         contentItem: RowLayout {

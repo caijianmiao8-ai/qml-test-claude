@@ -35,7 +35,8 @@ Item {
 
             Components.GlassCard {
                 themeTokens: root.themeTokens
-                padding: 24
+                padding: 0
+                radius: 20
                 Layout.fillWidth: true
 
                 ColumnLayout {
@@ -90,19 +91,22 @@ Item {
         property int bottomPadding: 16
         signal toggled()
 
-        implicitHeight: column.implicitHeight + bottomPadding
+        implicitHeight: column.implicitHeight + 32 + bottomPadding
         Layout.fillWidth: true
 
         ColumnLayout {
             id: column
             anchors.left: parent.left
+            anchors.leftMargin: 24
             anchors.right: toggleButton.left
             anchors.rightMargin: 16
+            anchors.top: parent.top
+            anchors.topMargin: 16
             spacing: 4
             Text {
                 id: labelText
                 color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
-                font.pixelSize: 16
+                font.pixelSize: 14
                 font.weight: Font.Medium
                 wrapMode: Text.WordWrap
             }
@@ -110,19 +114,21 @@ Item {
                 id: descriptionText
                 visible: descriptionText.text.length > 0
                 color: root.themeTokens ? root.themeTokens.textSecondary : "#64748B"
-                font.pixelSize: 13
+                font.pixelSize: 12
                 wrapMode: Text.WordWrap
             }
         }
 
         MouseArea {
             anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
             onClicked: toggled()
         }
 
         IOSSwitch {
             id: toggleButton
             anchors.right: parent.right
+            anchors.rightMargin: 24
             anchors.verticalCenter: column.verticalCenter
             value: parent.value
             onClicked: parent.toggled()
@@ -132,27 +138,46 @@ Item {
     component IOSSwitch: Item {
         property bool value: false
         signal clicked()
-        implicitWidth: 44
-        implicitHeight: 24
+        implicitWidth: 51
+        implicitHeight: 31
 
         Rectangle {
             anchors.fill: parent
             radius: height / 2
-            color: value ? "#990A84FF" : "#3357636F"
+            color: value ? (root.themeTokens.accentGradientStart + "99") : "#4D9CA3AF"
+            antialiasing: true
+
+            Behavior on color {
+                ColorAnimation { duration: 200; easing.type: Easing.InOutQuad }
+            }
         }
         Rectangle {
-            width: 20
-            height: 20
-            radius: 10
+            id: knob
+            width: 27
+            height: 27
+            radius: 13.5
             anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: value ? parent.width - width - 4 : 4
-            color: "#FFFFFFFF"
-            Behavior on anchors.leftMargin { NumberAnimation { duration: 160; easing.type: Easing.InOutQuad } }
-            Behavior on color { ColorAnimation { duration: 160 } }
+            x: value ? parent.width - width - 2 : 2
+            color: "#FFFFFF"
+            antialiasing: true
+
+            layer.enabled: true
+            layer.effect: Qt5Compat.GraphicalEffects.DropShadow {
+                horizontalOffset: 0
+                verticalOffset: 2
+                radius: 4
+                samples: 9
+                color: "#40000000"
+                transparentBorder: true
+            }
+
+            Behavior on x {
+                NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
+            }
         }
         MouseArea {
             anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
             onClicked: { clicked(); mouse.accepted = true }
         }
     }

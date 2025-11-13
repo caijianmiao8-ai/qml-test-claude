@@ -47,6 +47,7 @@ Item {
                         color: root.themeTokens ? root.themeTokens.textSecondary : "#64748B"
                         font.pixelSize: 14
                         wrapMode: Text.WordWrap
+                        Layout.preferredWidth: parent.width * 0.7
                     }
                 }
 
@@ -143,8 +144,11 @@ Item {
                         Components.GlassCard {
                             themeTokens: root.themeTokens
                             padding: 24
-                            implicitWidth: 360
-                            Layout.preferredWidth: 360
+                            radius: 20
+                            enableHoverEffect: true
+                            implicitWidth: 420
+                            implicitHeight: 260
+                            Layout.preferredWidth: 420
 
                             ColumnLayout {
                                 Layout.fillWidth: true
@@ -157,11 +161,23 @@ Item {
                                     Rectangle {
                                         width: 64
                                         height: 64
-                                        radius: 18
+                                        radius: 16
+                                        antialiasing: true
                                         gradient: Gradient {
-                                            GradientStop { position: 0; color: model.online ? "#0A84FF" : "#94A3B8" }
-                                            GradientStop { position: 1; color: model.online ? "#0051C7" : "#6B7280" }
+                                            GradientStop { position: 0; color: model.online ? root.themeTokens.accentGradientStart : "#94A3B8" }
+                                            GradientStop { position: 1; color: model.online ? root.themeTokens.accentGradientEnd : "#6B7280" }
                                         }
+
+                                        layer.enabled: model.online
+                                        layer.effect: Qt5Compat.GraphicalEffects.DropShadow {
+                                            horizontalOffset: 0
+                                            verticalOffset: 20
+                                            radius: 40
+                                            samples: 32
+                                            color: "#260A84FF"
+                                            transparentBorder: true
+                                        }
+
                                         Icons.SmartphoneIcon {
                                             anchors.centerIn: parent
                                             size: 32
@@ -176,14 +192,14 @@ Item {
                                         Text {
                                             text: model.name
                                             color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
-                                            font.pixelSize: 18
+                                            font.pixelSize: 20
                                             font.weight: Font.DemiBold
                                             elide: Text.ElideRight
                                         }
                                         Text {
                                             text: model.os
                                             color: root.themeTokens ? root.themeTokens.textSecondary : "#64748B"
-                                            font.pixelSize: 13
+                                            font.pixelSize: 14
                                             elide: Text.ElideRight
                                         }
                                     }
@@ -191,26 +207,27 @@ Item {
                                     Components.StatusBadge {
                                         online: model.online
                                         themeTokens: root.themeTokens
+                                        Layout.alignment: Qt.AlignTop
                                     }
                                 }
 
                                 ColumnLayout {
                                     Layout.fillWidth: true
-                                    spacing: 4
+                                    spacing: 8
 
                                     RowLayout {
                                         Layout.fillWidth: true
-                                        spacing: 6
+                                        spacing: 8
                                         Text {
                                             text: root.t ? root.t("lastActive") : "Last active"
                                             color: root.themeTokens ? root.themeTokens.textSecondary : "#6B7280"
-                                            font.pixelSize: 13
+                                            font.pixelSize: 14
                                         }
                                         Item { Layout.fillWidth: true }
                                         Text {
                                             text: model.lastActive
                                             color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
-                                            font.pixelSize: 13
+                                            font.pixelSize: 14
                                         }
                                     }
                                 }
@@ -220,35 +237,37 @@ Item {
                                     spacing: 8
                                     Button {
                                         Layout.fillWidth: true
-                                        Layout.preferredHeight: 36
+                                        Layout.preferredHeight: 40
                                         background: Rectangle {
                                             radius: 14
                                             color: root.themeTokens ? root.themeTokens.panelBackground : "#F9FAFB"
                                             border.color: root.themeTokens ? root.themeTokens.panelBorderColor : "#E5E7EB"
                                             border.width: 1
+                                            antialiasing: true
                                         }
                                         contentItem: Text {
                                             anchors.centerIn: parent
                                             text: root.t ? root.t("manage") : "Manage"
                                             color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
-                                            font.pixelSize: 13
+                                            font.pixelSize: 14
                                             font.weight: Font.Medium
                                         }
                                     }
 
                                     Button {
                                         Layout.preferredWidth: 40
-                                        Layout.preferredHeight: 36
+                                        Layout.preferredHeight: 40
                                         background: Rectangle {
                                             radius: 14
-                                            color: "#FEE2E2"
-                                            border.color: "#FCA5A5"
-                                            border.width: 0
+                                            color: root.themeTokens ? root.themeTokens.dangerBackground : "#FEE2E2"
+                                            border.color: root.themeTokens ? root.themeTokens.dangerBorder : "#FCA5A5"
+                                            border.width: 1
+                                            antialiasing: true
                                         }
                                         contentItem: Icons.TrashIcon {
                                             anchors.centerIn: parent
-                                            size: 18
-                                            color: "#F87171"
+                                            size: 16
+                                            color: root.themeTokens ? root.themeTokens.dangerText : "#F87171"
                                         }
                                     }
                                 }
@@ -286,8 +305,11 @@ Item {
                         Components.GlassCard {
                             themeTokens: root.themeTokens
                             padding: 24
-                            implicitWidth: 360
-                            Layout.preferredWidth: 360
+                            radius: 20
+                            enableHoverEffect: true
+                            implicitWidth: 540
+                            implicitHeight: 260
+                            Layout.preferredWidth: 540
 
                             ColumnLayout {
                                 Layout.fillWidth: true
@@ -300,11 +322,23 @@ Item {
                                     Rectangle {
                                         width: 64
                                         height: 64
-                                        radius: 18
+                                        radius: 16
+                                        antialiasing: true
                                         gradient: Gradient {
-                                            GradientStop { position: 0; color: model.online ? "#0A84FF" : "#94A3B8" }
-                                            GradientStop { position: 1; color: model.online ? "#0051C7" : "#6B7280" }
+                                            GradientStop { position: 0; color: model.online ? root.themeTokens.accentGradientStart : "#94A3B8" }
+                                            GradientStop { position: 1; color: model.online ? root.themeTokens.accentGradientEnd : "#6B7280" }
                                         }
+
+                                        layer.enabled: model.online
+                                        layer.effect: Qt5Compat.GraphicalEffects.DropShadow {
+                                            horizontalOffset: 0
+                                            verticalOffset: 20
+                                            radius: 40
+                                            samples: 32
+                                            color: "#260A84FF"
+                                            transparentBorder: true
+                                        }
+
                                         Icons.MonitorIcon {
                                             anchors.centerIn: parent
                                             size: 32
@@ -319,14 +353,14 @@ Item {
                                         Text {
                                             text: model.name
                                             color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
-                                            font.pixelSize: 18
+                                            font.pixelSize: 20
                                             font.weight: Font.DemiBold
                                             elide: Text.ElideRight
                                         }
                                         Text {
                                             text: model.os
                                             color: root.themeTokens ? root.themeTokens.textSecondary : "#64748B"
-                                            font.pixelSize: 13
+                                            font.pixelSize: 14
                                             elide: Text.ElideRight
                                         }
                                     }
@@ -334,84 +368,85 @@ Item {
                                     Components.StatusBadge {
                                         online: model.online
                                         themeTokens: root.themeTokens
+                                        Layout.alignment: Qt.AlignTop
                                     }
                                 }
 
                                 ColumnLayout {
                                     Layout.fillWidth: true
-                                    spacing: 4
+                                    spacing: 8
 
                                     RowLayout {
                                         Layout.fillWidth: true
-                                        spacing: 6
+                                        spacing: 8
                                         Text {
                                             text: root.t ? root.t("ipAddress") : "IP"
                                             color: root.themeTokens ? root.themeTokens.textSecondary : "#6B7280"
-                                            font.pixelSize: 13
+                                            font.pixelSize: 14
                                         }
                                         Item { Layout.fillWidth: true }
                                         Text {
                                             text: model.ip
                                             color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
-                                            font.pixelSize: 13
+                                            font.pixelSize: 14
                                             font.family: "Monospace"
                                         }
                                     }
 
                                     RowLayout {
                                         Layout.fillWidth: true
-                                        spacing: 6
+                                        spacing: 8
                                         Text {
                                             text: root.t ? root.t("lastSeen") : "Last seen"
                                             color: root.themeTokens ? root.themeTokens.textSecondary : "#6B7280"
-                                            font.pixelSize: 13
+                                            font.pixelSize: 14
                                         }
                                         Item { Layout.fillWidth: true }
                                         Text {
                                             text: model.lastConnect
                                             color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
-                                            font.pixelSize: 13
+                                            font.pixelSize: 14
                                         }
                                     }
 
                                     // 在线时显示网络模式 / 延迟
                                     ColumnLayout {
                                         Layout.fillWidth: true
-                                        spacing: 4
+                                        spacing: 8
                                         visible: model.online
 
                                         RowLayout {
                                             Layout.fillWidth: true
-                                            spacing: 6
+                                            spacing: 8
                                             Text {
                                                 text: root.t ? root.t("netMode") : "Network"
                                                 color: root.themeTokens ? root.themeTokens.textSecondary : "#6B7280"
-                                                font.pixelSize: 13
+                                                font.pixelSize: 14
                                             }
                                             Item { Layout.fillWidth: true }
                                             Text {
                                                 text: model.network
                                                 color: model.network === "LAN"
                                                        ? "#22C55E"
-                                                       : (model.network === "P2P" ? "#22D3EE" : "#FB923C")
-                                                font.pixelSize: 13
+                                                       : (model.network === "P2P" ? "#22D3EE" : root.themeTokens.orangeAccent)
+                                                font.pixelSize: 14
                                                 font.weight: Font.Medium
                                             }
                                         }
 
                                         RowLayout {
                                             Layout.fillWidth: true
-                                            spacing: 6
+                                            spacing: 8
                                             Text {
                                                 text: root.t ? root.t("delay") : "Delay"
                                                 color: root.themeTokens ? root.themeTokens.textSecondary : "#6B7280"
-                                                font.pixelSize: 13
+                                                font.pixelSize: 14
                                             }
                                             Item { Layout.fillWidth: true }
                                             Text {
                                                 text: model.delay
-                                                color: "#22C55E"
-                                                font.pixelSize: 13
+                                                color: root.themeTokens.successColor
+                                                font.pixelSize: 14
                                                 font.weight: Font.Medium
                                             }
                                         }
@@ -423,35 +458,37 @@ Item {
                                     spacing: 8
                                     Button {
                                         Layout.fillWidth: true
-                                        Layout.preferredHeight: 36
+                                        Layout.preferredHeight: 40
                                         background: Rectangle {
                                             radius: 14
                                             color: root.themeTokens ? root.themeTokens.panelBackground : "#F9FAFB"
                                             border.color: root.themeTokens ? root.themeTokens.panelBorderColor : "#E5E7EB"
                                             border.width: 1
+                                            antialiasing: true
                                         }
                                         contentItem: Text {
                                             anchors.centerIn: parent
                                             text: root.t ? root.t("manage") : "Manage"
                                             color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
-                                            font.pixelSize: 13
+                                            font.pixelSize: 14
                                             font.weight: Font.Medium
                                         }
                                     }
 
                                     Button {
                                         Layout.preferredWidth: 40
-                                        Layout.preferredHeight: 36
+                                        Layout.preferredHeight: 40
                                         background: Rectangle {
                                             radius: 14
-                                            color: "#FEE2E2"
-                                            border.color: "#FCA5A5"
-                                            border.width: 0
+                                            color: root.themeTokens ? root.themeTokens.dangerBackground : "#FEE2E2"
+                                            border.color: root.themeTokens ? root.themeTokens.dangerBorder : "#FCA5A5"
+                                            border.width: 1
+                                            antialiasing: true
                                         }
                                         contentItem: Icons.TrashIcon {
                                             anchors.centerIn: parent
-                                            size: 18
-                                            color: "#F87171"
+                                            size: 16
+                                            color: root.themeTokens ? root.themeTokens.dangerText : "#F87171"
                                         }
                                     }
                                 }

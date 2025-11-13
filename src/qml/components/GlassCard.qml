@@ -10,6 +10,7 @@ Item {
     property var themeTokens
     property real radius: 20
     property real padding: 24
+    property bool enableHoverEffect: false
 
     // 让使用者可以直接在 GlassCard 里面写内容
     default property alias content: contentItem.data
@@ -17,18 +18,28 @@ Item {
     implicitWidth: contentItem.implicitWidth + padding * 2
     implicitHeight: contentItem.implicitHeight + padding * 2
 
-    // 阴影，模拟 Tailwind 里的 shadow-[0_30px_60px_rgba(0,0,0,0.06)]
+    // Hover state
+    property bool hovered: false
+
+    // 阴影，模拟 React 里的 shadow-[0_30px_60px_rgba(0,0,0,0.06)] (light) 或 shadow-[0_30px_80px_rgba(0,0,0,0.8)] (dark)
     DropShadow {
         anchors.fill: bg
         source: bg
         horizontalOffset: 0
-        verticalOffset: 22
-        radius: 42
-        samples: 32
-        color: root.themeTokens ? root.themeTokens.cardShadowColor : "#1A000000"
+        verticalOffset: enableHoverEffect && hovered ? 40 : 30
+        radius: enableHoverEffect && hovered ? 80 : 60
+        samples: 64
+        color: root.themeTokens ? root.themeTokens.cardShadowColor : "#0F000000"
         transparentBorder: true
         cached: true
         z: -1
+
+        Behavior on verticalOffset {
+            NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+        }
+        Behavior on radius {
+            NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+        }
     }
 
     Rectangle {
@@ -36,14 +47,30 @@ Item {
         anchors.fill: parent
         radius: root.radius
         color: root.themeTokens ? root.themeTokens.cardBackground : "#B3FFFFFF"
-        border.color: root.themeTokens ? root.themeTokens.cardBorderColor : "#14000000"
+        border.color: root.themeTokens ? root.themeTokens.cardBorderColor : "#0D000000"
         border.width: 1
         antialiasing: true
+
+        // Subtle scale on hover (matching React's hover effect)
+        scale: enableHoverEffect && hovered ? 1.01 : 1.0
+        Behavior on scale {
+            NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+        }
     }
 
     Item {
         id: contentItem
         anchors.fill: bg
         anchors.margins: padding
+    }
+
+    // Hover detection
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: enableHoverEffect
+        onEntered: root.hovered = true
+        onExited: root.hovered = false
+        propagateComposedEvents: true
+        onPressed: mouse.accepted = false
     }
 }

@@ -21,34 +21,35 @@ Item {
         id: flick
         anchors.fill: parent
         contentWidth: width
-        contentHeight: contentColumn.implicitHeight + 40
+        contentHeight: contentColumn.implicitHeight + 64
         boundsBehavior: Flickable.StopAtBounds
         clip: true
 
         Column {
             id: contentColumn
-            width: Math.min(flick.width - 96, 960)
+            width: Math.min(flick.width - 64, 1120)
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: 40
-            spacing: 24
+            anchors.topMargin: 32
+            spacing: 32
 
             // ===== 标题 & 副标题 =====
             Column {
-                spacing: 6
+                spacing: 8
                 width: parent.width
 
                 Text {
                     text: t ? t("welcomeBack") : "欢迎回来"
                     color: themeTokens.textPrimary
-                    font.pixelSize: 32
+                    font.pixelSize: 36
                     font.weight: Font.DemiBold
                 }
 
                 Text {
                     text: t ? t("runningStatus") : "此电脑已准备好被远程接管（被控端）"
                     color: themeTokens.textSecondary
-                    font.pixelSize: 13
+                    font.pixelSize: 14
+                    wrapMode: Text.WordWrap
                 }
             }
 
@@ -60,15 +61,16 @@ Item {
             }
 
             // ===== 在线设备小卡片行 =====
-            RowLayout {
+            Flow {
                 width: parent.width
                 spacing: 24
 
                 Components.GlassCard {
                     themeTokens: root.themeTokens
                     padding: 24
-                    radius: 24
-                    Layout.preferredWidth: 260
+                    radius: 20
+                    width: 260
+                    height: 160
 
                     Column {
                         anchors.fill: parent
@@ -77,40 +79,38 @@ Item {
                         Rectangle {
                             width: 48
                             height: 48
-                            radius: 16
-                            color: "#FFF3E6"
+                            radius: 14
+                            color: root.themeTokens.orangeBackground
+                            antialiasing: true
 
                             Icons.MonitorIcon {
                                 anchors.centerIn: parent
                                 size: 24
-                                color: "#FB923C"   // orange-400
+                                color: root.themeTokens.orangeAccent
                             }
                         }
 
                         Text {
                             text: t ? t("onlineDevices") : "在线设备"
                             color: themeTokens.textSecondary
-                            font.pixelSize: 13
+                            font.pixelSize: 14
                         }
 
                         Text {
                             text: onlineDevicesCount.toString()
-                            color: "#FB923C"
-                            font.pixelSize: 28
+                            color: root.themeTokens.orangeAccent
+                            font.pixelSize: 30
                             font.weight: Font.DemiBold
                         }
                     }
                 }
-
-                // 占位，保持左侧卡片靠左、右侧留白，跟 React 版类似
-                Item { Layout.fillWidth: true }
             }
 
             // ===== 本机信息大卡片 =====
             Components.GlassCard {
                 themeTokens: root.themeTokens
                 padding: 32
-                radius: 24
+                radius: 20
                 width: parent.width
 
                 Column {
@@ -120,30 +120,30 @@ Item {
                     Text {
                         text: t ? t("thisMachineInfo") : "本机信息"
                         color: themeTokens.textPrimary
-                        font.pixelSize: 20
+                        font.pixelSize: 24
                         font.weight: Font.DemiBold
                     }
 
                     GridLayout {
                         columns: 2
-                        rowSpacing: 16
-                        columnSpacing: 48
+                        rowSpacing: 24
+                        columnSpacing: 64
                         width: parent.width
 
                         // 设备名称
                         Column {
                             Layout.fillWidth: true
-                            spacing: 4
+                            spacing: 8
 
                             Text {
                                 text: t ? t("deviceName") : "设备名称"
                                 color: themeTokens.textSecondary
-                                font.pixelSize: 12
+                                font.pixelSize: 14
                             }
                             Text {
                                 text: "我的工作电脑"
                                 color: themeTokens.textPrimary
-                                font.pixelSize: 16
+                                font.pixelSize: 18
                                 font.weight: Font.Medium
                             }
                         }
@@ -151,64 +151,71 @@ Item {
                         // 设备 ID
                         Column {
                             Layout.fillWidth: true
-                            spacing: 4
+                            spacing: 8
 
                             Text {
                                 text: t ? t("deviceId") : "设备ID"
                                 color: themeTokens.textSecondary
-                                font.pixelSize: 12
+                                font.pixelSize: 14
                             }
                             Text {
                                 text: "RD-2024-10241502"
                                 color: themeTokens.textPrimary
-                                font.pixelSize: 16
-                                font.family: "Consolas"
+                                font.pixelSize: 18
+                                font.family: "Monospace"
                             }
                         }
 
                         // 本机 IP
                         Column {
                             Layout.fillWidth: true
-                            spacing: 4
+                            spacing: 8
 
                             Text {
                                 text: t ? t("localIp") : "本机IP"
                                 color: themeTokens.textSecondary
-                                font.pixelSize: 12
+                                font.pixelSize: 14
                             }
                             Text {
                                 text: "192.168.1.100"
                                 color: themeTokens.textPrimary
-                                font.pixelSize: 16
-                                font.family: "Consolas"
+                                font.pixelSize: 18
+                                font.family: "Monospace"
                             }
                         }
 
                         // 网络状态
                         Column {
                             Layout.fillWidth: true
-                            spacing: 4
+                            spacing: 8
 
                             Text {
                                 text: t ? t("networkStatus") : "网络状态"
                                 color: themeTokens.textSecondary
-                                font.pixelSize: 12
+                                font.pixelSize: 14
                             }
 
                             Row {
-                                spacing: 6
+                                spacing: 8
 
                                 Rectangle {
                                     width: 10
                                     height: 10
                                     radius: 5
-                                    color: "#22C55E" // green-500
+                                    color: root.themeTokens.successColor
+                                    antialiasing: true
+
+                                    SequentialAnimation on opacity {
+                                        loops: Animation.Infinite
+                                        NumberAnimation { to: 0.5; duration: 800 }
+                                        NumberAnimation { to: 1.0; duration: 800 }
+                                    }
                                 }
 
                                 Text {
                                     text: t ? t("lanOnline") : "局域网在线"
-                                    color: "#22C55E"
-                                    font.pixelSize: 16
+                                    color: root.themeTokens.successColor
+                                    font.pixelSize: 18
                                     font.weight: Font.Medium
                                 }
                             }
@@ -221,7 +228,7 @@ Item {
             Components.GlassCard {
                 themeTokens: root.themeTokens
                 padding: 24
-                radius: 24
+                radius: 20
                 width: parent.width
 
                 Column {
@@ -231,7 +238,7 @@ Item {
                     Text {
                         text: t ? t("fastActions") : "快速操作"
                         color: themeTokens.textPrimary
-                        font.pixelSize: 16
+                        font.pixelSize: 18
                         font.weight: Font.DemiBold
                     }
 
@@ -242,8 +249,8 @@ Item {
                         // 设备管理
                         Rectangle {
                             Layout.fillWidth: true
-                            Layout.preferredHeight: 96
-                            radius: 16
+                            Layout.preferredHeight: 100
+                            radius: 14
                             color: themeTokens.panelBackground
                             border.color: themeTokens.panelBorderColor
                             border.width: 1
@@ -255,8 +262,8 @@ Item {
                                 spacing: 8
 
                                 Icons.GridIcon {
-                                    size: 22
-                                    color: "#0A84FF"
+                                    size: 24
+                                    color: themeTokens.accentGradientStart
                                 }
 
                                 Text {
@@ -270,15 +277,24 @@ Item {
                                     text: t ? t("viewAllDevices") : "查看已注册设备"
                                     color: themeTokens.textSecondary
                                     font.pixelSize: 12
+                                    wrapMode: Text.WordWrap
                                 }
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onEntered: parent.color = themeTokens.hoverBackground
+                                onExited: parent.color = themeTokens.panelBackground
                             }
                         }
 
                         // 系统设置
                         Rectangle {
                             Layout.fillWidth: true
-                            Layout.preferredHeight: 96
-                            radius: 16
+                            Layout.preferredHeight: 100
+                            radius: 14
                             color: themeTokens.panelBackground
                             border.color: themeTokens.panelBorderColor
                             border.width: 1
@@ -290,8 +306,8 @@ Item {
                                 spacing: 8
 
                                 Icons.SettingsIcon {
-                                    size: 22
-                                    color: "#A855F7" // purple-500
+                                    size: 24
+                                    color: themeTokens.purpleAccent
                                 }
 
                                 Text {
@@ -305,14 +321,23 @@ Item {
                                     text: t ? t("configureParams") : "配置参数"
                                     color: themeTokens.textSecondary
                                     font.pixelSize: 12
+                                    wrapMode: Text.WordWrap
                                 }
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onEntered: parent.color = themeTokens.hoverBackground
+                                onExited: parent.color = themeTokens.panelBackground
                             }
                         }
                     }
                 }
             }
 
-            Item { height: 24 } // 底部留一点空白
+            Item { height: 32 } // 底部留一点空白
         }
     }
 }

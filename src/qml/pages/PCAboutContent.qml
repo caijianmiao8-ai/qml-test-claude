@@ -30,9 +30,24 @@ Item {
                 Rectangle {
                     width: 96
                     height: 96
-                    radius: 24
-                    color: "#330A84FF"
+                    radius: 20
+                    antialiasing: true
+                    gradient: Gradient {
+                        GradientStop { position: 0; color: root.themeTokens.accentGradientStart }
+                        GradientStop { position: 1; color: root.themeTokens.accentGradientEnd }
+                    }
                     Layout.alignment: Qt.AlignHCenter
+
+                    layer.enabled: true
+                    layer.effect: Qt5Compat.GraphicalEffects.DropShadow {
+                        horizontalOffset: 0
+                        verticalOffset: 20
+                        radius: 40
+                        samples: 32
+                        color: "#260A84FF"
+                        transparentBorder: true
+                    }
+
                     Icons.MonitorIcon {
                         anchors.centerIn: parent
                         size: 48
@@ -78,11 +93,12 @@ Item {
             Components.GlassCard {
                 themeTokens: root.themeTokens
                 padding: 24
+                radius: 20
                 Layout.fillWidth: true
 
                 ColumnLayout {
                     Layout.fillWidth: true
-                    spacing: 12
+                    spacing: 16
                     Text {
                         text: root.t ? root.t("changelog") : "Changelog"
                         color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
@@ -122,32 +138,45 @@ Item {
             Components.GlassCard {
                 themeTokens: root.themeTokens
                 padding: 24
+                radius: 20
                 Layout.fillWidth: true
 
-                GridLayout {
+                ColumnLayout {
                     Layout.fillWidth: true
-                    columns: 2
-                    columnSpacing: 24
-                    rowSpacing: 12
+                    spacing: 16
+
+                    Text {
+                        text: root.t ? root.t("systemInfo") : "System Info"
+                        color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
+                        font.pixelSize: 18
+                        font.weight: Font.DemiBold
+                    }
+
+                    GridLayout {
+                        Layout.fillWidth: true
+                        columns: 2
+                        columnSpacing: 32
+                        rowSpacing: 16
 
                     Repeater {
                         model: [
                             { label: root.t ? root.t("operatingSystem") : "OS", value: root.t ? root.t("operatingSystemValue") : "Windows 11 Pro" },
                             { label: root.t ? root.t("buildVersion") : "Build", value: root.t ? root.t("buildVersionValue") : "22000.1219" }
                         ]
-                        delegate: ColumnLayout {
-                            Layout.fillWidth: true
-                            spacing: 4
-                            Text {
-                                text: modelData.label
-                                color: root.themeTokens ? root.themeTokens.textSecondary : "#64748B"
-                                font.pixelSize: 13
-                            }
-                            Text {
-                                text: modelData.value
-                                color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
-                                font.pixelSize: 16
-                                font.weight: Font.Medium
+                            delegate: ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: 8
+                                Text {
+                                    text: modelData.label
+                                    color: root.themeTokens ? root.themeTokens.textSecondary : "#64748B"
+                                    font.pixelSize: 14
+                                }
+                                Text {
+                                    text: modelData.value
+                                    color: root.themeTokens ? root.themeTokens.textPrimary : "#111827"
+                                    font.pixelSize: 14
+                                    font.weight: Font.Medium
+                                }
                             }
                         }
                     }
