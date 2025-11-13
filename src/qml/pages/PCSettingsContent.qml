@@ -163,7 +163,7 @@ Item {
             antialiasing: true
 
             layer.enabled: true
-            layer.effect: Qt5Compat.GraphicalEffects.DropShadow {
+            layer.effect: DropShadow {
                 horizontalOffset: 0
                 verticalOffset: 2
                 radius: 4

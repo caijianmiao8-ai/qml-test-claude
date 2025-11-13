@@ -40,7 +40,7 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
 
                     layer.enabled: true
-                    layer.effect: Qt5Compat.GraphicalEffects.DropShadow {
+                    layer.effect: DropShadow {
                         horizontalOffset: 0
                         verticalOffset: 20
                         radius: 40

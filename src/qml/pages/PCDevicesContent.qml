@@ -170,7 +170,7 @@ Item {
                                         }
 
                                         layer.enabled: model.online
-                                        layer.effect: Qt5Compat.GraphicalEffects.DropShadow {
+                                        layer.effect: DropShadow {
                                             horizontalOffset: 0
                                             verticalOffset: 20
                                             radius: 40
@@ -331,7 +331,7 @@ Item {
                                         }
 
                                         layer.enabled: model.online
-                                        layer.effect: Qt5Compat.GraphicalEffects.DropShadow {
+                                        layer.effect: DropShadow {
                                             horizontalOffset: 0
                                             verticalOffset: 20
                                             radius: 40
