@@ -5,13 +5,13 @@ QtObject {
 
     readonly property var lightTokens: ({
         // Backgrounds - matching React's radial gradient & transparency
-        backgroundGradientStart: "#E6FFFFFF",  // rgba(255,255,255,0.9)
-        backgroundGradientEnd: "#99E2E8F0",    // rgba(226,232,240,0.6)
+        backgroundGradientStart: "#F9FAFB",    // Very light gray-blue
+        backgroundGradientEnd: "#E5E7EB",      // Light gray
         backgroundOverlay: "#FFFFFFFF",
-        panelBackground: "#99FFFFFF",          // bg-white/60
+        panelBackground: "#F2FFFFFF",          // bg-white/95 (more opaque)
         panelBorderColor: "#0D000000",         // border-black/5
-        cardBackground: "#B3FFFFFF",           // bg-white/70
-        cardBorderColor: "#0D000000",          // border-black/5
+        cardBackground: "#F2FFFFFF",           // bg-white/95 (more opaque for cards)
+        cardBorderColor: "#14000000",          // border-black/8
         cardShadowColor: "#0F000000",          // shadow rgba(0,0,0,0.06)
 
         // Text colors - slate scale

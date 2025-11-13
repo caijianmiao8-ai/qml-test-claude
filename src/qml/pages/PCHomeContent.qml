@@ -21,17 +21,20 @@ Item {
         id: flick
         anchors.fill: parent
         contentWidth: width
-        contentHeight: contentColumn.implicitHeight + 64
+        contentHeight: contentColumn.implicitHeight + 80
         boundsBehavior: Flickable.StopAtBounds
         clip: true
 
-        Column {
-            id: contentColumn
-            width: Math.min(flick.width - 64, 1120)
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 32
-            spacing: 32
+        Item {
+            width: flick.width
+            height: contentColumn.implicitHeight + 80
+
+            Column {
+                id: contentColumn
+                width: Math.min(parent.width - 64, 960)
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: 32
+                spacing: 24
 
             // ===== 标题 & 副标题 =====
             Column {
@@ -338,6 +341,7 @@ Item {
             }
 
             Item { height: 32 } // 底部留一点空白
+            }
         }
     }
 }
